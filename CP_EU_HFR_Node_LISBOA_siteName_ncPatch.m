@@ -142,6 +142,8 @@ if (exist('out', 'dir') ~= 7)
 end
 save('out/LISBOA.mat','ncFiles', 'procStatus');
 
+disp(['[' datestr(now) '] - - Files successfully patched: ' num2str(sum(procStatus)) '/' num2str(length(ncFiles))]);
+
 if(EHNlc_err==0)
     disp(['[' datestr(now) '] - - ' 'CP_EU_HFR_Node_LISBOA_siteName_ncPatch successfully executed.']);
 else

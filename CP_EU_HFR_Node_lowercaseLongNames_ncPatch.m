@@ -184,11 +184,13 @@ try
                 ncwriteatt(ncFiles(nc_idx).name,'RDVA','long_name',char('Radial sea water velocity away from instrument'));
                 ncwriteatt(ncFiles(nc_idx).name,'RDVA','ancillary_variables',char('QCflag, OWTR_QC, MDFL_QC, CSPD_QC, VART_QC, RDCT_QC'));
                 ncwriteatt(ncFiles(nc_idx).name,'RDVA','coordinates',char('TIME DEPTH LATITUDE LONGITUDE'));
+                ncwriteatt(ncFiles(nc_idx).name,'RDVA','sdn_parameter_name',char('Speed of water current (Eulerian measurement) in the water body by directional range-gated radar'));
                 ncwriteatt(ncFiles(nc_idx).name,'RDVA','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'DRVA','long_name',char('Direction of radial vector away from instrument'));
                 ncwriteatt(ncFiles(nc_idx).name,'DRVA','ancillary_variables',char('QCflag, OWTR_QC, MDFL_QC, AVRB_QC, RDCT_QC'));
                 ncwriteatt(ncFiles(nc_idx).name,'DRVA','coordinates',char('TIME DEPTH LATITUDE LONGITUDE'));
                 ncwriteatt(ncFiles(nc_idx).name,'DRVA','units',char('degree_true'));
+                ncwriteatt(ncFiles(nc_idx).name,'DRVA','sdn_parameter_name',char('Direction (towards) of water current (Eulerian measurement) in the water body by directional range-gated radar'));
                 ncwriteatt(ncFiles(nc_idx).name,'DRVA','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'EWCT','long_name',char('West-east current component'));
                 ncwriteatt(ncFiles(nc_idx).name,'EWCT','coordinates',char('TIME DEPTH LATITUDE LONGITUDE'));
@@ -368,6 +370,8 @@ if (exist('out', 'dir') ~= 7)
     mkdir('out');
 end
 save('out/longNames.mat','ncFiles', 'procStatus');
+
+disp(['[' datestr(now) '] - - Files successfully patched: ' num2str(sum(procStatus)) '/' num2str(length(ncFiles))]);
 
 if(EHNlc_err==0)
     disp(['[' datestr(now) '] - - ' 'CP_EU_HFR_Node_lowercaseLongNames_ncPatch successfully executed.']);
