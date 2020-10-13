@@ -334,7 +334,7 @@ try
             ncwriteatt(ncFiles(nc_idx).name,'/','wmo_inst_type',char(''));
             ncwriteatt(ncFiles(nc_idx).name,'/','software_version',char('v2.2'));
             ncwriteatt(ncFiles(nc_idx).name,'/','software_name',char('HFR_Node__Centralized_Processing'));
-            ncwriteatt(ncFiles(nc_idx).name,'/','institution_references',char(ncreadatt(ncFiles(nc_idx).name,'/','institution_reference')));
+            ncwriteatt(ncFiles(nc_idx).name,'/','institution_references',char(strrep(ncreadatt(ncFiles(nc_idx).name,'/','institution_reference'),'; ',' ')));
             ncid = netcdf.open(ncFiles(nc_idx).name, 'NC_WRITE');
             netcdf.reDef(ncid);
             netcdf.delAtt(ncid,netcdf.getConstant('GLOBAL'),'institution_reference');
