@@ -325,7 +325,7 @@ try
             ncwriteatt(ncFiles(nc_idx).name,'/','ices_platform_code',char(''));
             ncwriteatt(ncFiles(nc_idx).name,'/','format_version',char("1.4"));
             ncwriteatt(ncFiles(nc_idx).name,'/','netcdf_version',char('netCDF-4 classic model'));
-            ncwriteatt(ncFiles(nc_idx).name,'/','Conventions',char("CF-1.6 Copernicus-InSituTAC-FormatManual-1.4 Copernicus-InSituTAC-SRD-1.41 Copernicus-InSituTAC-ParametersList-3.2.0"));
+            ncwriteatt(ncFiles(nc_idx).name,'/','Conventions',char("CF-1.6 Copernicus-InSituTAC-FormatManual-1.41 Copernicus-InSituTAC-SRD-1.5 Copernicus-InSituTAC-ParametersList-3.2.0"));
             ncwriteatt(ncFiles(nc_idx).name,'/','references',char('http://marine.copernicus.eu http://www.marineinsitu.eu http://www.marineinsitu.eu/wp-content/uploads/2018/02/HFR_Data_Model_Reference_Card_v1.pdf'));
             ncwriteatt(ncFiles(nc_idx).name,'/','bottom_depth', char(''));
             ncwriteatt(ncFiles(nc_idx).name,'/','doi',char(''));
