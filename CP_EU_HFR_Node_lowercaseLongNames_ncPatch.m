@@ -44,6 +44,9 @@ try
     %% Apply the patch to the variable long names
     for nc_idx=1:length(ncFiles)
         try
+            % Check if the file was already patched
+            deprecated = ncreadatt(ncFiles(nc_idx).name,'/','institution_reference');
+            
             % Retrieve manufacturer info
             sensorATT = ncreadatt(ncFiles(nc_idx).name,'/','sensor');
             % Retrieve site code
