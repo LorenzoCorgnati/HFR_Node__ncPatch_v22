@@ -36,7 +36,15 @@ try
     %% List the netCDF files to be patched
     
     ncFiles = rdir([EHNfolder filesep '**' filesep '*_nc' filesep '**' filesep format_version filesep '**' filesep '*.nc']);
+    
+    % Remove files from HFR-WesternItaly network
+    Name = {ncFiles.name};
+    matchC = reshape(strfind(Name,'HFR-Ibiza'), size(ncFiles));
+    match = ~cellfun('isempty', matchC);
+    ncFiles(match) = [];
+    
     disp(['[' datestr(now) '] - - ' 'File list retrieved (' num2str(length(ncFiles)) ' files to be patched).']);
+    
     procStatus = zeros(length(ncFiles),1);
     
     %%
