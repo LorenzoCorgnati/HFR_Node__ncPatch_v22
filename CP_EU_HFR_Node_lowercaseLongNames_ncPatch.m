@@ -39,7 +39,7 @@ try
     
     % Remove files from HFR-WesternItaly network
     Name = {ncFiles.name};
-    matchC = reshape(strfind(Name,'HFR-Ibiza'), size(ncFiles));
+    matchC = reshape(strfind(Name,'HFR-WesternItaly'), size(ncFiles));
     match = ~cellfun('isempty', matchC);
     ncFiles(match) = [];
     
@@ -68,20 +68,20 @@ try
                 ncwriteatt(ncFiles(nc_idx).name,'TIME','calendar',char('standard'));
                 ncwriteatt(ncFiles(nc_idx).name,'TIME','valid_min',double(-90000));
                 ncwriteatt(ncFiles(nc_idx).name,'TIME','valid_max',double(90000));
-                ncwriteatt(ncFiles(nc_idx).name,'TIME','uncertainty',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'TIME','uncertainty',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','long_name',char('Latitude of each location'));
                 ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','valid_min',single(-90));
                 ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','valid_max',single(90));
-                ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','uncertainty',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','uncertainty',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','long_name',char('Longitude of each location'));
                 ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','valid_min',single(-180));
                 ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','valid_max',single(180));
-                ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','uncertainty',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','uncertainty',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','long_name',char('Depth'));
                 %                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','FillValue',netcdf.getConstant('NC_FILL_FLOAT'));
                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','valid_min',single(-12000));
                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','valid_max',single(12000));
-                ncwriteatt(ncFiles(nc_idx).name,'DEPH','uncertainty',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'DEPH','uncertainty',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'EWCT','long_name',char('West-east current component'));
                 ncwriteatt(ncFiles(nc_idx).name,'EWCT','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
@@ -90,32 +90,40 @@ try
                 ncwriteatt(ncFiles(nc_idx).name,'NSCT','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                 ncwriteatt(ncFiles(nc_idx).name,'NSCT','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'EWCS','long_name',char('Standard deviation of surface eastward sea water velocity'));
-                ncwriteatt(ncFiles(nc_idx).name,'EWCS','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'EWCS','standard_name',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'EWCS','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                 ncwriteatt(ncFiles(nc_idx).name,'EWCS','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'NSCS','long_name',char('Standard deviation of surface northward sea water velocity'));
-                ncwriteatt(ncFiles(nc_idx).name,'NSCS','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'NSCS','standard_name',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'NSCS','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                 ncwriteatt(ncFiles(nc_idx).name,'NSCS','data_mode',char('R'));
                 if(~contains(siteCODE,'HFR-US','IgnoreCase',true))
                     if(contains(sensorATT,'wera','IgnoreCase',true))
                         ncwriteatt(ncFiles(nc_idx).name,'UACC','long_name',char('Accuracy of surface eastward sea water velocity'));
-                        ncwriteatt(ncFiles(nc_idx).name,'UACC','standard_name',char(''));
+                        ncwriteatt(ncFiles(nc_idx).name,'UACC','standard_name',char(' '));
+                        ncwriteatt(ncFiles(nc_idx).name,'UACC','sdn_parameter_name',char(' '));
+                        ncwriteatt(ncFiles(nc_idx).name,'UACC','sdn_parameter_urn',char(' '));
                         ncwriteatt(ncFiles(nc_idx).name,'UACC','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                         ncwriteatt(ncFiles(nc_idx).name,'UACC','data_mode',char('R'));
                         ncwriteatt(ncFiles(nc_idx).name,'VACC','long_name',char('Accuracy of surface northward sea water velocity'));
-                        ncwriteatt(ncFiles(nc_idx).name,'VACC','standard_name',char(''));
+                        ncwriteatt(ncFiles(nc_idx).name,'VACC','standard_name',char(' '));
+                        ncwriteatt(ncFiles(nc_idx).name,'VACC','sdn_parameter_name',char(' '));
+                        ncwriteatt(ncFiles(nc_idx).name,'VACC','sdn_parameter_urn',char(' '));
                         ncwriteatt(ncFiles(nc_idx).name,'VACC','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                         ncwriteatt(ncFiles(nc_idx).name,'VACC','data_mode',char('R'));
                     elseif(contains(sensorATT,'codar','IgnoreCase',true))
                         ncwriteatt(ncFiles(nc_idx).name,'CCOV','long_name',char('Covariance of surface sea water velocity'));
-                        ncwriteatt(ncFiles(nc_idx).name,'CCOV','standard_name',char(''));
+                        ncwriteatt(ncFiles(nc_idx).name,'CCOV','standard_name',char(' '));
+                        ncwriteatt(ncFiles(nc_idx).name,'CCOV','sdn_parameter_name',char(' '));
+                        ncwriteatt(ncFiles(nc_idx).name,'CCOV','sdn_parameter_urn',char(' '));
                         ncwriteatt(ncFiles(nc_idx).name,'CCOV','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                         ncwriteatt(ncFiles(nc_idx).name,'CCOV','data_mode',char('R'));
                     end
                 end
                 ncwriteatt(ncFiles(nc_idx).name,'GDOP','long_name',char('Geometrical dilution of precision'));
-                ncwriteatt(ncFiles(nc_idx).name,'GDOP','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'GDOP','standard_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'GDOP','sdn_parameter_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'GDOP','sdn_parameter_urn',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'GDOP','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                 ncwriteatt(ncFiles(nc_idx).name,'GDOP','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'TIME_QC','long_name',char('Time quality flag'));
@@ -135,11 +143,15 @@ try
                 ncwriteatt(ncFiles(nc_idx).name,'CSPD_QC','long_name',char('Velocity threshold quality flag'));
                 ncwriteatt(ncFiles(nc_idx).name,'CSPD_QC','conventions',char('Copernicus Marine In Situ reference table 2'));
                 ncwriteatt(ncFiles(nc_idx).name,'NARX','long_name',char('Number of receive antennas'));
-                ncwriteatt(ncFiles(nc_idx).name,'NARX','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'NARX','standard_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'NARX','sdn_parameter_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'NARX','sdn_parameter_urn',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'NARX','valid_max',int8(127));
                 ncwriteatt(ncFiles(nc_idx).name,'NARX','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'NATX','long_name',char('Number of transmit antennas'));
-                ncwriteatt(ncFiles(nc_idx).name,'NATX','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'NATX','standard_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'NATX','sdn_parameter_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'NATX','sdn_parameter_urn',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'NATX','valid_max',int8(128));
                 ncwriteatt(ncFiles(nc_idx).name,'NATX','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'SLTR','long_name',char('Receive antenna latitudes'));
@@ -155,42 +167,46 @@ try
                 ncwriteatt(ncFiles(nc_idx).name,'SLNT','standard_name',char('longitude'));
                 ncwriteatt(ncFiles(nc_idx).name,'SLNT','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'SCDR','long_name',char('Receive antenna codes'));
-                ncwriteatt(ncFiles(nc_idx).name,'SCDR','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDR','standard_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDR','sdn_parameter_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDR','sdn_parameter_urn',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'SCDR','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'SCDT','long_name',char('Transmit antenna codes'));
-                ncwriteatt(ncFiles(nc_idx).name,'SCDT','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDT','standard_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDT','sdn_parameter_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDT','sdn_parameter_urn',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'SCDT','data_mode',char('R'));
             elseif(contains(ncFiles(nc_idx).folder,'Radials_nc'))
                 ncwriteatt(ncFiles(nc_idx).name,'TIME','long_name',char('Time'));
                 ncwriteatt(ncFiles(nc_idx).name,'TIME','calendar',char('standard'));
                 ncwriteatt(ncFiles(nc_idx).name,'TIME','valid_min',double(-90000));
                 ncwriteatt(ncFiles(nc_idx).name,'TIME','valid_max',double(90000));
-                ncwriteatt(ncFiles(nc_idx).name,'TIME','uncertainty',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'TIME','uncertainty',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','long_name',char('Latitude of each location'));
                 ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','valid_min',single(-90));
                 ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','valid_max',single(90));
-                ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','uncertainty',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'LATITUDE','uncertainty',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','long_name',char('Longitude of each location'));
                 ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','valid_min',single(-180));
                 ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','valid_max',single(180));
-                ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','uncertainty',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'LONGITUDE','uncertainty',char(' '));
                 if(contains(sensorATT,'codar','IgnoreCase',true))
                     ncwriteatt(ncFiles(nc_idx).name,'BEAR','long_name',char('Bearing away from instrument'));
-                    ncwriteatt(ncFiles(nc_idx).name,'BEAR','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'BEAR','standard_name',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'BEAR','valid_min',single(0));
                     ncwriteatt(ncFiles(nc_idx).name,'BEAR','valid_max',single(360));
-                    ncwriteatt(ncFiles(nc_idx).name,'BEAR','uncertainty',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'BEAR','uncertainty',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'RNGE','long_name',char('Range away from instrument'));
-                    ncwriteatt(ncFiles(nc_idx).name,'RNGE','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'RNGE','standard_name',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'RNGE','valid_min',single(0));
                     ncwriteatt(ncFiles(nc_idx).name,'RNGE','valid_max',single(90000));
-                    ncwriteatt(ncFiles(nc_idx).name,'RNGE','uncertainty',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'RNGE','uncertainty',char(' '));
                 end
                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','long_name',char('Depth'));
                 %                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','FillValue',netcdf.getConstant('NC_FILL_FLOAT'));
                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','valid_min',single(-12000));
                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','valid_max',single(12000));
-                ncwriteatt(ncFiles(nc_idx).name,'DEPH','uncertainty',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'DEPH','uncertainty',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'DEPH','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'RDVA','long_name',char('Radial sea water velocity away from instrument'));
                 ncwriteatt(ncFiles(nc_idx).name,'RDVA','ancillary_variables',char('QCflag, OWTR_QC, MDFL_QC, CSPD_QC, VART_QC, RDCT_QC'));
@@ -211,48 +227,66 @@ try
                 ncwriteatt(ncFiles(nc_idx).name,'NSCT','data_mode',char('R'));
                 if(contains(sensorATT,'codar','IgnoreCase',true))
                     ncwriteatt(ncFiles(nc_idx).name,'ESPC','long_name',char('Radial standard deviation of current velocity over the scatter patch'));
-                    ncwriteatt(ncFiles(nc_idx).name,'ESPC','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'ESPC','standard_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'ESPC','sdn_parameter_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'ESPC','sdn_parameter_urn',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'ESPC','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'ESPC','data_mode',char('R'));
                     ncwriteatt(ncFiles(nc_idx).name,'ETMP','long_name',char('Radial standard deviation of current velocity over coverage period'));
-                    ncwriteatt(ncFiles(nc_idx).name,'ETMP','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'ETMP','standard_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'ETMP','sdn_parameter_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'ETMP','sdn_parameter_urn',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'ETMP','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'ETMP','data_mode',char('R'));
                     ncwriteatt(ncFiles(nc_idx).name,'MINV','long_name',char('Radial sea water velocity away from instrument minimum'));
-                    ncwriteatt(ncFiles(nc_idx).name,'MINV','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'MINV','standard_name',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'MINV','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'MINV','data_mode',char('R'));
                     ncwriteatt(ncFiles(nc_idx).name,'MAXV','long_name',char('Radial sea water velocity away from instrument maximum'));
-                    ncwriteatt(ncFiles(nc_idx).name,'MAXV','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'MAXV','standard_name',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'MAXV','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'MAXV','data_mode',char('R'));
                     ncwriteatt(ncFiles(nc_idx).name,'ERSC','long_name',char('Radial sea water velocity spatial quality count'));
-                    ncwriteatt(ncFiles(nc_idx).name,'ERSC','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'ERSC','standard_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'ERSC','sdn_parameter_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'ERSC','sdn_parameter_urn',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'ERSC','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'ERSC','data_mode',char('R'));
                     ncwriteatt(ncFiles(nc_idx).name,'ERTC','long_name',char('Radial sea water velocity temporal quality count'));
-                    ncwriteatt(ncFiles(nc_idx).name,'ERTC','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'ERTC','standard_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'ERTC','sdn_parameter_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'ERTC','sdn_parameter_urn',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'ERTC','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'ERTC','data_mode',char('R'));
                     ncwriteatt(ncFiles(nc_idx).name,'XDST','long_name',char('Eastward distance from instrument'));
-                    ncwriteatt(ncFiles(nc_idx).name,'XDST','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'XDST','standard_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'XDST','sdn_parameter_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'XDST','sdn_parameter_urn',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'XDST','coordinates',char('LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'XDST','data_mode',char('R'));
                     ncwriteatt(ncFiles(nc_idx).name,'YDST','long_name',char('Northward distance from instrument'));
-                    ncwriteatt(ncFiles(nc_idx).name,'YDST','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'YDST','standard_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'YDST','sdn_parameter_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'YDST','sdn_parameter_urn',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'YDST','coordinates',char('LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'YDST','data_mode',char('R'));
                     ncwriteatt(ncFiles(nc_idx).name,'SPRC','long_name',char('Radial sea water velocity cross spectra range cell'));
-                    ncwriteatt(ncFiles(nc_idx).name,'SPRC','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'SPRC','standard_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'SPRC','sdn_parameter_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'SPRC','sdn_parameter_urn',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'SPRC','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'SPRC','data_mode',char('R'));
                 elseif(contains(sensorATT,'wera','IgnoreCase',true))
                     ncwriteatt(ncFiles(nc_idx).name,'HCSS','long_name',char('Radial variance of current velocity over coverage period'));
-                    ncwriteatt(ncFiles(nc_idx).name,'HCSS','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'HCSS','standard_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'HCSS','sdn_parameter_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'HCSS','sdn_parameter_urn',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'HCSS','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'HCSS','data_mode',char('R'));
                     ncwriteatt(ncFiles(nc_idx).name,'EACC','long_name',char('Radial accuracy of current velocity over coverage period'));
-                    ncwriteatt(ncFiles(nc_idx).name,'EACC','standard_name',char(''));
+                    ncwriteatt(ncFiles(nc_idx).name,'EACC','standard_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'EACC','sdn_parameter_name',char(' '));
+                    ncwriteatt(ncFiles(nc_idx).name,'EACC','sdn_parameter_urn',char(' '));
                     ncwriteatt(ncFiles(nc_idx).name,'EACC','coordinates',char('TIME DEPH LATITUDE LONGITUDE'));
                     ncwriteatt(ncFiles(nc_idx).name,'EACC','data_mode',char('R'));
                 end
@@ -285,12 +319,16 @@ try
                 ncwriteatt(ncFiles(nc_idx).name,'RDCT_QC','long_name',char('Radial count quality flag'));
                 ncwriteatt(ncFiles(nc_idx).name,'RDCT_QC','conventions',char('Copernicus Marine In Situ reference table 2'));
                 ncwriteatt(ncFiles(nc_idx).name,'NARX','long_name',char('Number of receive antennas'));
-                ncwriteatt(ncFiles(nc_idx).name,'NARX','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'NARX','standard_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'NARX','sdn_parameter_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'NARX','sdn_parameter_urn',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'NARX','valid_min',int8(0));
                 ncwriteatt(ncFiles(nc_idx).name,'NARX','valid_max',int8(127));
                 ncwriteatt(ncFiles(nc_idx).name,'NARX','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'NATX','long_name',char('Number of transmit antennas'));
-                ncwriteatt(ncFiles(nc_idx).name,'NATX','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'NATX','standard_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'NATX','sdn_parameter_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'NATX','sdn_parameter_urn',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'NATX','valid_min',int8(0));
                 ncwriteatt(ncFiles(nc_idx).name,'NATX','valid_max',int8(128));
                 ncwriteatt(ncFiles(nc_idx).name,'NATX','data_mode',char('R'));
@@ -319,10 +357,14 @@ try
                 ncwriteatt(ncFiles(nc_idx).name,'SLNT','units','degree_east');
                 ncwriteatt(ncFiles(nc_idx).name,'SLNT','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'SCDR','long_name',char('Receive antenna codes'));
-                ncwriteatt(ncFiles(nc_idx).name,'SCDR','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDR','standard_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDR','sdn_parameter_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDR','sdn_parameter_urn',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'SCDR','data_mode',char('R'));
                 ncwriteatt(ncFiles(nc_idx).name,'SCDT','long_name',char('Transmit antenna codes'));
-                ncwriteatt(ncFiles(nc_idx).name,'SCDT','standard_name',char(''));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDT','standard_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDT','sdn_parameter_name',char(' '));
+                ncwriteatt(ncFiles(nc_idx).name,'SCDT','sdn_parameter_urn',char(' '));
                 ncwriteatt(ncFiles(nc_idx).name,'SCDT','data_mode',char('R'));
             end
             
@@ -354,6 +396,10 @@ try
             
             % Add _FillValue to DEPH variable
             status = system(['ncatted -O -a _FillValue,DEPH,o,f,9.96921E36 ' ncFiles(nc_idx).name]);
+            
+            % Modify _FillValue for char variables (SCDR and SCDT)
+            status = system(['ncatted -O -a _FillValue,SCDR,o,c,'' '' ' ncFiles(nc_idx).name]);
+            status = system(['ncatted -O -a _FillValue,SCDT,o,c,'' '' ' ncFiles(nc_idx).name]);
             
             % Update the date_update attribute
             ncwriteatt(ncFiles(nc_idx).name,'/','date_update',char([datestr(now, 'yyyy-mm-dd') 'T' datestr(now, 'HH:MM:SS') 'Z']));
