@@ -18,13 +18,19 @@ clear all
 close all
 clc
 
+% Set the network name
+networkID = 'HFR_COSYNA';
+
 % Set the format version
 format_version = 'v2.2';
 
 % Setup the standard netCDF datafile folder
+% all files processing
 % EHNfolder = '/home/radarcombine/EU_HFR_NODE/HFR_*';
 % EHNfolder = '/mnt/data/CNR/RADAR/DATI/Dati_HFR_*';
 EHNfolder = '/home/lorenz/Desktop/netCDF_check/v2.2/HFR_*';
+% network selection
+% EHNfolder = ['/home/radarcombine/EU_HFR_NODE/' networkID];
 
 EHNlc_err = 0;
 
@@ -35,7 +41,10 @@ disp(['[' datestr(now) '] - - ' 'CP_EU_HFR_Node_lowercaseLongNames_ncPatch start
 try
     %% List the netCDF files to be patched
     
+    % all files processing
     ncFiles = rdir([EHNfolder filesep '**' filesep '*_nc' filesep '**' filesep format_version filesep '**' filesep '*.nc']);
+%     % Network selection
+%     ncFiles = rdir([EHNfolder filesep '*_nc' filesep '**' filesep format_version filesep '**' filesep '*.nc']);
     
     % Remove files from HFR-WesternItaly network
     Name = {ncFiles.name};
@@ -396,10 +405,19 @@ try
             
             % Add _FillValue to DEPH variable
             status = system(['ncatted -O -a _FillValue,DEPH,o,f,9.96921E36 ' ncFiles(nc_idx).name]);
+            if(status~=0)
+                EHNlc_err = 1;
+            end
             
             % Modify _FillValue for char variables (SCDR and SCDT)
             status = system(['ncatted -O -a _FillValue,SCDR,o,c,'' '' ' ncFiles(nc_idx).name]);
+            if(status~=0)
+                EHNlc_err = 1;
+            end
             status = system(['ncatted -O -a _FillValue,SCDT,o,c,'' '' ' ncFiles(nc_idx).name]);
+            if(status~=0)
+                EHNlc_err = 1;
+            end
             
             % Update the date_update attribute
             ncwriteatt(ncFiles(nc_idx).name,'/','date_update',char([datestr(now, 'yyyy-mm-dd') 'T' datestr(now, 'HH:MM:SS') 'Z']));
